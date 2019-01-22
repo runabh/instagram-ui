@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 import Header from './header'
 import '../styles/Profile.css';
+import NotFoundPage from './NotFoundPage';
+
 
 class Profile extends Component{
   constructor(props){
@@ -32,19 +35,32 @@ class Profile extends Component{
 }  
 
 render(){
-  return(
-    <div>
+  if(this.state.rows.length > 0){
+    return(
+      <div>
+        <Header />
+        <br /><br /><br /><br />
+        <div className="profileFeed">
+        {this.state.rows.map((obj, index) => (
+          <div className="profileFeed-picture">
+          <img src = {obj.url} alt="text" className="profileFeed-picture-img" />
+          </div>
+            ))}
+        </div>
+      </div>
+    );
+  }
+  else{
+    return(
+      <div>
       <Header />
       <br /><br /><br /><br />
-      <div className="profileFeed">
-      {this.state.rows.map((obj, index) => (
-        <div className="profileFeed-picture">
-        <img src = {obj.url} alt="text" className="profileFeed-picture-img" />
-        </div>
-      ))}
+      <NotFoundPage />
       </div>
-    </div>
-  );
+    );
+    
+  }
+  
 }
 }
 //     const Profile = (props) => (

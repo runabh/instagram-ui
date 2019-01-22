@@ -5,8 +5,10 @@ import App from './App';
 
 const NotFoundPage = () => (
 
-    <div>404!
-    <Link to="/">Home</Link>
+    <div>
+    <h1>Sorry, this page isn't available.</h1>
+    <a>The link you followed may be broken, or the page may have been removed. Go back to
+    <Link to="/"> Instagram</Link>.</a>
     </div>
 );
 
