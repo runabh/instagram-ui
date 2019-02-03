@@ -5,6 +5,7 @@ const PictureModal = (props) => (
     <Modal
     isOpen={props.modalIsOpen}
     onRequestClose={props.closeModal}
+    onAfterOpen={props.onAfterOpen}
     className="modal-dialog modal-lg modal-dialog-centered"
     >
     
@@ -17,7 +18,7 @@ const PictureModal = (props) => (
                         <img src = {props.url} alt="text" className="img-fluid" ></img>
                     </div>
                     <div className="col-4">
-                        <p><strong>{props.username}</strong> {props.title}</p>
+                        <p><strong>{props.userId}</strong> {props.title}</p>
                         <div className="pictureFooter">
                             <div className="pictureActions">
                                 <div className="glyphHeart"></div>

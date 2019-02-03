@@ -11,3 +11,7 @@
 .profileFeed-picture-img{
     width: 300px;
 }
+
+.ReactModal__Body--open{
+    overflow: hidden;
+}

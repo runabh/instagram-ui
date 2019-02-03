@@ -9,8 +9,14 @@ import PictureModal from './PictureModal';
 class Profile extends Component{
   constructor(props){
     super(props);
-    this.username = this.props.match.params.id;
+    this.userId = this.props.match.params.id;
     this.state= {
+      user:{
+        userId:undefined,
+        userName:undefined,
+        userDesc:undefined,
+        userDPUrl:undefined
+      },
       rows:[],
       modalIsOpen: false,
       modalUrl: undefined,
@@ -35,14 +41,19 @@ class Profile extends Component{
       modalTitle: undefined
     });
   }
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    //document.getElementById("container_fluid").style.overflow = "hidden";
+  }
   
   componentWillMount(){
-    const apiUrl = 'http://localhost:3000/api/feed/' + this.username;
+    const apiUrl = 'http://localhost:3000/api/feed/' + this.userId;
     fetch(apiUrl)
     .then(res => res.json())
     .then(data => {
+      this.setState({user: data.user});
       let rows = [];
-      data.map((obj, index) => {
+      data.pics.map((obj, index) => {
         rows.push({
           id: obj.id,
           userId: obj.userId,
@@ -50,7 +61,7 @@ class Profile extends Component{
           url: obj.url
         });
       });
-      this.setState({rows});
+      this.setState({rows: rows});
     });
 
   }
@@ -58,10 +69,12 @@ class Profile extends Component{
   render(){
     return(
     <ProfileChild 
+    user={this.state.user}
     rows={this.state.rows}
-    username={this.username}
+    userId={this.userId}
     modalIsOpen={this.state.modalIsOpen}
     openModal={this.openModal}
+    onAfterOpen={this.afterOpenModal}
     closeModal={this.closeModal}
     modalUrl={this.state.modalUrl}
     modalTitle={this.state.modalTitle}
@@ -80,12 +93,22 @@ const ProfileChild = (props) => {
   }
   if(props.rows.length > 0){
     return(
-      <div className="container-fluid">
+      <div className="container-fluid" id="container_fluid">
         <Header />
-        <br /><br /><br /><br />
-        <div className="row ">
+        <br />
+        <div className="row justify-content-md-center">
+        <div className="col-2"><img src={props.user[0].userDPUrl} className="rounded-circle img-fluid" /></div>
+        <div className="col-4">
+        <h2>{props.user[0].userId} </h2>
+        <h6>{props.rows.length} posts 100 Followers 100 Following</h6>
+        <h5>{props.user[0].userName} </h5>
+        <p>{props.user[0].userDesc} </p>
+        </div>
+        </div>
+        <br /><br /><br />
+        <div className="row">
         {props.rows.map((obj, index) => (
-          <div key={obj.id} className="col-4 mt-3">
+          <div key={obj.id} className="col-4 mt-4">
           <img src = {obj.url} alt="text" className="img-thumbnail" onClick={openModal.bind(this, obj)} />
           </div>
           
@@ -93,9 +116,10 @@ const ProfileChild = (props) => {
         <PictureModal 
           modalIsOpen={props.modalIsOpen} 
           closeModal={props.closeModal}
+          onAfterOpen={props.onAfterOpen}
           url={props.modalUrl}
           title={props.modalTitle}
-          username={props.username}>
+          userId={props.userId}>
           </PictureModal>
         </div>
          
