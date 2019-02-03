@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/picture.css'
 import '../styles/page.css'
 import '../styles/header.css'
+import '../bootstrap/css/bootstrap.css'
 import Feed from './feed'
 
 class App extends Component {
@@ -10,7 +11,7 @@ class App extends Component {
   }
   
   componentDidMount(){
-    fetch('https://instagram-data-source.herokuapp.com/api/feed')
+    fetch('http://localhost:3000/api/feed')
     .then(res => res.json())
     .then(data => {
       let rows = [];
@@ -29,7 +30,7 @@ class App extends Component {
   render() {
     
     return (
-      <div className="pageBody">
+      <div className="container-fluid">
       
       <Feed rows={this.state.rows} />
       

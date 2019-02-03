@@ -7,8 +7,8 @@ const NotFoundPage = () => (
 
     <div>
     <h1>Sorry, this page isn't available.</h1>
-    <a>The link you followed may be broken, or the page may have been removed. Go back to
-    <Link to="/"> Instagram</Link>.</a>
+    <p>The link you followed may be broken, or the page may have been removed. Go back to
+    <Link to="/"> Instagram</Link>.</p>
     </div>
 );
 
