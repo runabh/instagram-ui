@@ -128,10 +128,15 @@ const ProfileChild = (props) => {
   }
   else{
     return(
-      <div>
-      <Header />
-      <br /><br /><br /><br />
-      <NotFoundPage />
+      <div className="container">
+        <Header />
+        <div className="row mt-5">
+        <div className="col text-center">
+        <div class="spinner-border text-secondary mt-5" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        </div>
+        </div>
       </div>
     );
   
