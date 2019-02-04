@@ -1,0 +1,17 @@
+.profileFeed{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    max-width:1000px;
+    margin: 10px auto;
+}
+.profileFeed-picture{
+   
+    margin: 10px;
+}
+.profileFeed-picture-img{
+    width: 300px;
+}
+
+.ReactModal__Body--open{
+    overflow: hidden;
+}

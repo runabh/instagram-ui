@@ -1,0 +1,40 @@
+.pageHeader{
+    background-color: white;
+    height:80px;
+    position:fixed;
+    top:0;
+    width:100%;
+    border-bottom: 1px solid #efefef;
+    z-index: 1;
+}
+.pageHeader-2{
+    height: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    
+}
+.glyphInsta{
+    display: inline-block;
+    background-image: url('/img/a76d58247991.png');
+    background-repeat: no-repeat;
+    background-position: -163px -90px;
+    height: 24px;
+    width: 24px;
+    margin: 0px 15px;
+}
+.divider{
+    display: inline-block;
+    background-color: #262626;
+    height: 28px;
+    margin: 0px 0;
+    width: 1px;
+}
+.insta-logo{
+    display: inline-block;
+    background-image: url('/img/a76d58247991.png');
+    background-repeat: no-repeat;
+    background-position: -58px 0;
+    height: 24px;
+    width:103px;
+    margin: 0px 15px;
+}

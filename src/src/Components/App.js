@@ -11,7 +11,7 @@ class App extends Component {
   }
   
   componentDidMount(){
-    fetch('http://localhost:3000/api/feed')
+    fetch('https://instagram-data-source.herokuapp.com/api/feed')
     .then(res => res.json())
     .then(data => {
       let rows = [];
