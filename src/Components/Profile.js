@@ -97,8 +97,8 @@ const ProfileChild = (props) => {
         <Header />
         <br />
         <div className="row justify-content-md-center">
-        <div className="col-2"><img src={props.user[0].userDPUrl} className="rounded-circle img-fluid" /></div>
-        <div className="col-4">
+        <div className="col-sm-2"><img src={props.user[0].userDPUrl} className="rounded-circle img-fluid" /></div>
+        <div className="col-sm-4">
         <h2>{props.user[0].userId} </h2>
         <h6>{props.rows.length} posts 100 Followers 100 Following</h6>
         <h5>{props.user[0].userName} </h5>
