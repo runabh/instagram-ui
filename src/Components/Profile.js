@@ -47,7 +47,7 @@ class Profile extends Component{
   }
   
   componentWillMount(){
-    const apiUrl = 'http://localhost:3000/api/feed/' + this.userId;
+    const apiUrl = 'https://instagram-data-source.herokuapp.com/api/feed/' + this.userId;
     fetch(apiUrl)
     .then(res => res.json())
     .then(data => {
