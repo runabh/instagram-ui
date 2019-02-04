@@ -14,10 +14,10 @@ const PictureModal = (props) => (
         <div className="modal-body">
             <div className="container">
                 <div className="row">
-                    <div className="col-8">
+                    <div className="col-sm-8">
                         <img src = {props.url} alt="text" className="img-fluid" ></img>
                     </div>
-                    <div className="col-4">
+                    <div className="col-sm-4">
                         <p><strong>{props.userId}</strong> {props.title}</p>
                         <div className="pictureFooter">
                             <div className="pictureActions">
