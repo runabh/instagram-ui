@@ -15,18 +15,18 @@ const PictureModal = (props) => (
             <div className="container">
                 <div className="row">
                     <div className="col-lg-8">
-                        <img src = {props.url} alt="text" className="img-fluid" ></img>
+                        <img src = {props.modalObj.url} alt="text" className="img-fluid" ></img>
                     </div>
                     <div className="col-lg-4">
-                        <p><strong>{props.userId}</strong> {props.title}</p>
+                        <p><strong>{props.userId}</strong> {props.modalObj.title}</p>
                         <div className="pictureFooter">
                             <div className="pictureActions">
-                                <div className="glyphHeart"></div>
+                                <div className={props.modalObj.liked==0 ? "glyphHeart" : "glyphHeart glyphHeart-liked"}></div>
                                 <div className="glyphComment"></div>
                                 <div className="glyphShare"></div>
                                 <div className="glyphSave"></div>
                             </div>
-                        
+                            <p><strong>{props.modalObj.likes>0 ? props.modalObj.likes + ' likes' : ''} </strong></p>
                         </div>
                     </div>
                 </div>

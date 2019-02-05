@@ -19,8 +19,12 @@ class Profile extends Component{
       },
       rows:[],
       modalIsOpen: false,
-      modalUrl: undefined,
-      modalTitle: undefined
+      modalObj:{
+        url: undefined,
+        title: undefined,
+        likes: undefined,
+        liked: undefined
+      }
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -30,15 +34,24 @@ class Profile extends Component{
   openModal(e){
     this.setState({
       modalIsOpen: true, 
-      modalUrl: e.url,
-      modalTitle: e.title
+      modalObj:{
+        url: e.url,
+        title: e.title,
+        likes: e.likes,
+        liked: e.liked
+      }
+
     });
   }
   closeModal(){
     this.setState({
       modalIsOpen: false, 
-      modalUrl:undefined,
-      modalTitle: undefined
+      modalObj:{
+        url: undefined,
+        title: undefined,
+        likes: undefined,
+        liked: undefined
+      }
     });
   }
   afterOpenModal() {
@@ -54,12 +67,7 @@ class Profile extends Component{
       this.setState({user: data.user});
       let rows = [];
       data.pics.map((obj, index) => {
-        rows.push({
-          id: obj.id,
-          userId: obj.userId,
-          title: obj.title,
-          url: obj.url
-        });
+        rows.push(obj);
       });
       this.setState({rows: rows});
     });
@@ -71,23 +79,18 @@ class Profile extends Component{
     <ProfileChild 
     user={this.state.user}
     rows={this.state.rows}
-    userId={this.userId}
+    modalObj={this.state.modalObj}
     modalIsOpen={this.state.modalIsOpen}
     openModal={this.openModal}
     onAfterOpen={this.afterOpenModal}
     closeModal={this.closeModal}
-    modalUrl={this.state.modalUrl}
-    modalTitle={this.state.modalTitle}
     />
     );
   }
 }
 
 const ProfileChild = (props) => {
-  let pictureObj = {
-    url: undefined,
-    title: undefined
-  };
+  
   const openModal = (e) => {
     props.openModal(e);
   }
@@ -117,9 +120,8 @@ const ProfileChild = (props) => {
           modalIsOpen={props.modalIsOpen} 
           closeModal={props.closeModal}
           onAfterOpen={props.onAfterOpen}
-          url={props.modalUrl}
-          title={props.modalTitle}
-          userId={props.userId}>
+          modalObj={props.modalObj}
+          userId={props.user[0].userId}>
           </PictureModal>
         </div>
          
