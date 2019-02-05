@@ -9,7 +9,7 @@ const PictureModal = (props) => (
     className="modal-dialog modal-lg modal-dialog-centered"
     >
     
-    <div className="modal-content">
+    <div className="modal-content mt-4">
     
         <div className="modal-body">
             <div className="container">

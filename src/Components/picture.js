@@ -17,11 +17,12 @@ class Picture extends Component{
             <img src={props.url} alt="text" />
             <div className="pictureFooter">
             <div className="pictureActions">
-            <div className="glyphHeart"></div>
+            <div className={props.liked==0 ? "glyphHeart" : "glyphHeart glyphHeart-liked"}></div>
             <div className="glyphComment"></div>
             <div className="glyphShare"></div>
             <div className="glyphSave"></div>
             </div>
+            <p><strong>{props.likes>0 ? props.likes + ' likes' : ''} </strong></p>
             <Link to={props.userId} className="username">{props.userId}</Link>
             <a className="title"> {props.title}</a>
             </div>

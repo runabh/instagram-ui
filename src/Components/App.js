@@ -11,24 +11,19 @@ class App extends Component {
   }
   
   componentDidMount(){
-    fetch('http://localhost:3000/api/feed')
+    fetch('https://instagram-data-source.herokuapp.com/api/feed')
     .then(res => res.json())
     .then(data => {
       let rows = [];
       data.map((picture, index) => {
-        rows.push({
-          id: picture.id,
-          userId: picture.userId,
-          title: picture.title,
-          url: picture.url
-        });
+        rows.push(picture);
       });
       this.setState({rows});
     });
     
   }
   render() {
-    
+    if(this.state.rows.length > 0){
     return (
       <div className="container-fluid">
       
@@ -36,6 +31,21 @@ class App extends Component {
       
       </div>
     );
+    }
+    else{
+      return(
+        <div className="container">
+        
+        <div className="row mt-5">
+        <div className="col text-center">
+        <div className="spinner-border text-secondary mt-5" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+        </div>
+        </div>
+      </div>
+      );
+    }
   
   }
 }

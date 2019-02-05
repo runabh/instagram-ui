@@ -48,6 +48,10 @@
     width:24px;
     margin: 0px 10px 0px 0px;
 }
+.glyphHeart-liked{
+    background-position: -78px -142px;
+    
+}
 .glyphComment{
     background-image: url('/img/f86e62b5d0c7.png');
     background-repeat: no-repeat;

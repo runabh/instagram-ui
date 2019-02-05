@@ -47,7 +47,7 @@ class Profile extends Component{
   }
   
   componentWillMount(){
-    const apiUrl = 'http://localhost:3000/api/feed/' + this.userId;
+    const apiUrl = 'https://instagram-data-source.herokuapp.com/api/feed/' + this.userId;
     fetch(apiUrl)
     .then(res => res.json())
     .then(data => {
@@ -97,7 +97,7 @@ const ProfileChild = (props) => {
         <Header />
         
         <div className="row justify-content-md-center mt-4">
-          <div className="col-sm-6"><img src={props.user[0].userDPUrl} className="rounded-circle img-fluid mx-auto d-block" style={{width:200}} /></div>
+          <div className="col-sm-6"><img src={props.user[0].userDPUrl} className="rounded-circle img-fluid mx-auto d-block" style={{width:180}} /></div>
           <div className="col-sm-6 text-sm-left text-center mt-4">
            <h2 >{props.user[0].userId} </h2>
             <p><strong>{props.rows.length}</strong> posts</p>
@@ -106,10 +106,10 @@ const ProfileChild = (props) => {
           </div>
         </div>
       
-        <div className="row mt-4">
+        <div className="row mt-4 mx-n1">
         {props.rows.map((obj, index) => (
-          <div key={obj.id} className="col-4 mt-4">
-          <img src = {obj.url} alt="text" className="img-thumbnail img-fluid" onClick={openModal.bind(this, obj)} />
+          <div key={obj.id} className="col-4 mt-2 px-1">
+          <img src = {obj.url} alt="text" className="img-fluid" onClick={openModal.bind(this, obj)} />
           </div>
           
         ))}
@@ -128,10 +128,15 @@ const ProfileChild = (props) => {
   }
   else{
     return(
-      <div>
-      <Header />
-      <br /><br /><br /><br />
-      <NotFoundPage />
+      <div className="container">
+        <Header />
+        <div className="row mt-5">
+        <div className="col text-center">
+        <div className="spinner-border text-secondary mt-5" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+        </div>
+        </div>
       </div>
     );
   
