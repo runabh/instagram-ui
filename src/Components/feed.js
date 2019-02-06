@@ -11,7 +11,7 @@ import Header from './header'
       <Header />
       {props.rows.map((obj, index) => (
         <div key={index}>
-        <Picture props = {obj}/>
+        <Picture obj = {obj} />
         </div>
       )
     )}
