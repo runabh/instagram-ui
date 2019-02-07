@@ -23,11 +23,13 @@ class Profile extends Component{
         url: undefined,
         title: undefined,
         likes: undefined,
-        liked: undefined
+        liked: undefined,
+        comments: []
       }
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.likePicture = this.likePicture.bind(this);
   }
   
 
@@ -38,7 +40,8 @@ class Profile extends Component{
         url: e.url,
         title: e.title,
         likes: e.likes,
-        liked: e.liked
+        liked: e.liked,
+        comments: e.comments
       }
 
     });
@@ -49,8 +52,7 @@ class Profile extends Component{
       modalObj:{
         url: undefined,
         title: undefined,
-        likes: undefined,
-        liked: undefined
+        comments: []
       }
     });
   }
@@ -59,7 +61,15 @@ class Profile extends Component{
     //document.getElementById("container_fluid").style.overflow = "hidden";
   }
   
-  componentWillMount(){
+  likePicture(){
+    let modalObj = this.state.modalObj;
+    let val = modalObj.liked===0 ? 1 : 0;
+    modalObj.liked= val;
+    modalObj.likes = val===0 ? --modalObj.likes : ++modalObj.likes;
+    this.setState({modalObj});
+  } 
+
+  componentDidMount(){
     const apiUrl = 'https://instagram-data-source.herokuapp.com/api/feed/' + this.userId;
     fetch(apiUrl)
     .then(res => res.json())
@@ -84,6 +94,7 @@ class Profile extends Component{
     openModal={this.openModal}
     onAfterOpen={this.afterOpenModal}
     closeModal={this.closeModal}
+    likePicture={this.likePicture}
     />
     );
   }
@@ -98,7 +109,7 @@ const ProfileChild = (props) => {
     return(
       <div className="container-fluid" id="container_fluid">
         <Header />
-        
+        <div className="profileFeed">
         <div className="row justify-content-md-center mt-4">
           <div className="col-sm-6"><img src={props.user[0].userDPUrl} className="rounded-circle img-fluid mx-auto d-block" style={{width:180}} /></div>
           <div className="col-sm-6 text-sm-left text-center mt-4">
@@ -121,10 +132,11 @@ const ProfileChild = (props) => {
           closeModal={props.closeModal}
           onAfterOpen={props.onAfterOpen}
           modalObj={props.modalObj}
-          userId={props.user[0].userId}>
+          userId={props.user[0].userId}
+          likePicture={props.likePicture}>
           </PictureModal>
         </div>
-         
+        </div>   
       </div>
     );
   }

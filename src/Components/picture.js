@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import Comments from './Comments';
 
 
 class Picture extends Component{
@@ -8,6 +9,7 @@ class Picture extends Component{
         this.state={
             obj:this.props.obj
         }
+        this.likePicture = this.likePicture.bind(this);
     }
   
     likePicture(){
@@ -29,17 +31,17 @@ class Picture extends Component{
                     <div className="container-fluid">
                     <div className="row">
                     <div className="col-1"><img src={this.state.obj.userDPUrl} className="rounded-circle" style={{width:30}} /></div>
-                    <div className="col-1"><Link to={this.state.obj.userId}>{this.state.obj.userId}</Link></div>
+                    <div className="col-1"><Link className="username" to={this.state.obj.userId}>{this.state.obj.userId}</Link></div>
                     </div>
                     </div>
                 </div>
                 <div className="col-12 mt-sm-3 mt-2">
-                    <img src={this.state.obj.url} alt="picture" onDoubleClick={this.likePicture.bind(this)}   />
+                    <img src={this.state.obj.url} alt="picture" onDoubleClick={this.likePicture}   />
                 </div>
                 <div className="col-12 mt-2">
                     <div className="container-fluid">
                     <div className="row">
-                        <div className="col-1"><div className={this.state.obj.liked===0 ? "glyph glyphHeart" : "glyph glyphHeart glyphHeart-liked"}></div></div>
+                        <div className="col-1"><div onClick={this.likePicture} className={this.state.obj.liked===0 ? "glyph glyphHeart" : "glyph glyphHeart glyphHeart-liked"}></div></div>
                         <div className="col-1"><div className="glyph glyphComment"></div></div>
                         <div className="col-1"><div className="glyph glyphShare"></div></div>
                         <div className="col-1 offset-sm-8"><div className="glyph glyphSave"></div></div>
@@ -53,8 +55,13 @@ class Picture extends Component{
                 </div>
                 <div className="col-12">
                     <div className="container-fluid">
-                    <Link to={this.state.obj.userId}>{this.state.obj.userId}</Link>
+                    <Link className="username" to={this.state.obj.userId}>{this.state.obj.userId}</Link>
                     <a> {this.state.obj.title}</a>
+                    </div>
+                </div>
+                <div className="col-12 mt-2">
+                    <div className="container-fluid">
+                        <Comments commentsArr={this.state.obj.comments} />
                     </div>
                 </div>
                 

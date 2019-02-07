@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
+import Comments from './Comments'
 Modal.setAppElement('#root')
 const PictureModal = (props) => (
     <Modal
@@ -15,18 +16,25 @@ const PictureModal = (props) => (
             <div className="container">
                 <div className="row">
                     <div className="col-lg-8">
-                        <img src = {props.modalObj.url} alt="text" className="img-fluid" ></img>
+                        <img src = {props.modalObj.url} onDoubleClick={props.likePicture} alt="text" className="img-fluid" ></img>
                     </div>
                     <div className="col-lg-4">
-                        <p><strong>{props.userId}</strong> {props.modalObj.title}</p>
+                        <div><p><strong>{props.userId}</strong> {props.modalObj.title}</p></div>
+                        <div className="">
+                            <Comments commentsArr={props.modalObj.comments} />
+                        </div>
                         <div className="pictureFooter">
-                            <div className="pictureActions">
-                                <div className={props.modalObj.liked==0 ? "glyphHeart" : "glyphHeart glyphHeart-liked"}></div>
-                                <div className="glyphComment"></div>
-                                <div className="glyphShare"></div>
-                                <div className="glyphSave"></div>
-                            </div>
+                        <div className="row  mt-2">
+                            <div className="col-1"><div onClick={props.likePicture} className={props.modalObj.liked===0 ? "glyph glyphHeart" : "glyph glyphHeart glyphHeart-liked"}></div></div>
+                            <div className="col-1"><div className="glyph glyphComment"></div></div>
+                            <div className="col-1"><div className="glyph glyphShare"></div></div>
+                            <div className="col-1 offset-sm-7 offset-lg-5"><div className="glyph glyphSave"></div></div>
+                        </div>
+                        <div>
                             <p><strong>{props.modalObj.likes>0 ? props.modalObj.likes + ' likes' : ''} </strong></p>
+                        </div>
+                        
+                        
                         </div>
                     </div>
                 </div>
