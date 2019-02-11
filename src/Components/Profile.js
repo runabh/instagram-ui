@@ -9,6 +9,7 @@ import PictureModal from './PictureModal';
 class Profile extends Component{
   constructor(props){
     super(props);
+    
     this.userId = this.props.match.params.id;
     this.state= {
       user:{
@@ -17,6 +18,7 @@ class Profile extends Component{
         userDesc:undefined,
         userDPUrl:undefined
       },
+      isComplete: false,
       rows:[],
       modalIsOpen: false,
       modalObj:{
@@ -80,23 +82,65 @@ class Profile extends Component{
         rows.push(obj);
       });
       this.setState({rows: rows});
+    }).then(() => {
+      this.setState({isComplete:true});
     });
 
   }
 
   render(){
-    return(
-    <ProfileChild 
-    user={this.state.user}
-    rows={this.state.rows}
-    modalObj={this.state.modalObj}
-    modalIsOpen={this.state.modalIsOpen}
-    openModal={this.openModal}
-    onAfterOpen={this.afterOpenModal}
-    closeModal={this.closeModal}
-    likePicture={this.likePicture}
-    />
-    );
+    if(this.state.isComplete){
+      if(this.state.user[0] === undefined){
+        return(
+          <div className="container-fluid" id="container_fluid">
+          <Header />
+          <div className="profileFeed">
+          404! User does not exist.
+          </div>
+          </div>
+        );
+      }
+      else if(typeof this.state.user[0].userId != 'undefined' && this.state.rows.length === 0){
+        return(
+          <div className="container-fluid" id="container_fluid">
+          <Header />
+          <div className="profileFeed">
+          User has not uploaded any pictures yet.
+          </div>
+          </div>
+        );
+      }
+    else{
+      return(
+          <ProfileChild 
+          user={this.state.user}
+          rows={this.state.rows}
+          modalObj={this.state.modalObj}
+          modalIsOpen={this.state.modalIsOpen}
+          openModal={this.openModal}
+          onAfterOpen={this.afterOpenModal}
+          closeModal={this.closeModal}
+          likePicture={this.likePicture}
+          />
+          );
+      }
+    }
+    else{
+      return(
+        <div className="container">
+          <Header />
+          <div className="row mt-5">
+          <div className="col text-center">
+          <div className="spinner-border text-secondary mt-5" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+          </div>
+          </div>
+        </div>
+      );
+    
+    }
+    
   }
 }
 
@@ -122,7 +166,7 @@ const ProfileChild = (props) => {
       
         <div className="row mt-4 mx-n1">
         {props.rows.map((obj, index) => (
-          <div key={obj.id} className="col-4 mt-2 px-1">
+          <div key={obj._id} className="col-4 mt-2 px-1">
           <img src = {obj.url} alt="text" className="img-fluid" onClick={openModal.bind(this, obj)} />
           </div>
           
