@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import Comments from './Comments'
+import AddComments from './AddComment'
 Modal.setAppElement('#root')
 const PictureModal = (props) => (
     <Modal
@@ -15,10 +16,10 @@ const PictureModal = (props) => (
         <div className="modal-body">
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-8">
+                    <div className="col-lg-8 px-2">
                         <img src = {props.modalObj.url} onDoubleClick={props.likePicture} alt="text" className="img-fluid" ></img>
                     </div>
-                    <div className="col-lg-4">
+                    <div className="col-lg-4 px-1">
                         <div><p><strong>{props.userId}</strong> {props.modalObj.title}</p></div>
                         <div className="">
                             <Comments commentsArr={props.modalObj.comments} />
@@ -33,7 +34,7 @@ const PictureModal = (props) => (
                         <div>
                             <p><strong>{props.modalObj.likes>0 ? props.modalObj.likes + ' likes' : ''} </strong></p>
                         </div>
-                        
+                        <AddComments postComment={props.postComment} />
                         
                         </div>
                     </div>

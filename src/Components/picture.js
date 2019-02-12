@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import Comments from './Comments';
+import AddComments from './AddComment';
 
 
 class Picture extends Component{
@@ -18,7 +19,38 @@ class Picture extends Component{
         obj.liked= val;
         obj.likes = val===0 ? --obj.likes : ++obj.likes;
         this.setState({obj});
-      } 
+        
+        
+        const url = 'https://instagram-data-source.herokuapp.com/api/post/like'
+        fetch(url, {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(obj), // data can be `string` or {object}!
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+        .then(console.log('Success'));
+    } 
+
+    postComment = (comment) => {
+        let obj = this.state.obj;
+        let commentObj = {
+            userId: 'runabh',
+            comment: comment
+        }
+        obj.comments.push(commentObj);
+        this.setState({obj});
+
+        const url = 'https://instagram-data-source.herokuapp.com/api/post/comment'
+        fetch(url, {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(obj), // data can be `string` or {object}!
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+        .then(console.log('Success'));
+    }
     
     render(){
         
@@ -62,6 +94,7 @@ class Picture extends Component{
                 <div className="col-12 mt-2">
                     <div className="container-fluid">
                         <Comments commentsArr={this.state.obj.comments} />
+                        <AddComments postComment={this.postComment} />
                     </div>
                 </div>
                 

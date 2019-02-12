@@ -56,6 +56,43 @@
     
 }
 
+.pictureComments{
+    max-height: 325px;
+    overflow-y: auto;
+}
+
+@media (min-width: 100px) { 
+    .pictureComments{
+        max-height: 80px;
+    }
+ }
+
+@media (min-width: 576px) { 
+    .pictureComments{
+        max-height: 100px;
+    }
+ }
+
+
+@media (min-width: 768px) { 
+    .pictureComments{
+    max-height: 100px;
+    } 
+}
+
+
+@media (min-width: 992px) { 
+    .pictureComments{
+        max-height: 325px;
+    }
+ }
+
+
+@media (min-width: 1200px) { 
+    .pictureComments{
+        max-height: 325px;
+    }
+ }
 
 .title{
     display: inline;

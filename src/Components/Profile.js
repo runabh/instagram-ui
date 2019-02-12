@@ -22,6 +22,7 @@ class Profile extends Component{
       rows:[],
       modalIsOpen: false,
       modalObj:{
+        _id: undefined,
         url: undefined,
         title: undefined,
         likes: undefined,
@@ -39,13 +40,13 @@ class Profile extends Component{
     this.setState({
       modalIsOpen: true, 
       modalObj:{
+        _id: e._id,
         url: e.url,
         title: e.title,
         likes: e.likes,
         liked: e.liked,
         comments: e.comments
       }
-
     });
   }
   closeModal(){
@@ -68,8 +69,48 @@ class Profile extends Component{
     let val = modalObj.liked===0 ? 1 : 0;
     modalObj.liked= val;
     modalObj.likes = val===0 ? --modalObj.likes : ++modalObj.likes;
-    this.setState({modalObj});
+    //this.setState({modalObj});
+    let rows = this.state.rows;
+    let objIndex = rows.findIndex((obj => obj._id === modalObj._id));
+    rows[objIndex].likes = modalObj.likes;
+    rows[objIndex].liked = modalObj.liked;
+    this.setState({rows});
+    
+    let data = rows[objIndex];
+    const url = 'https://instagram-data-source.herokuapp.com/api/post/like'
+    fetch(url, {
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+    .then(console.log('Success'));
   } 
+
+  postComment = (comment) => {
+    let modalObj = this.state.modalObj;
+    let commentObj = {
+        userId: 'runabh',
+        comment: comment
+    }
+    modalObj.comments.push(commentObj);
+    let rows = this.state.rows;
+    let objIndex = rows.findIndex((obj => obj._id === modalObj._id));
+    rows[objIndex].comments = modalObj.comments;
+    this.setState({rows});
+
+    
+    const url = 'https://instagram-data-source.herokuapp.com/api/post/comment'
+    fetch(url, {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(modalObj), // data can be `string` or {object}!
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json())
+    .then(console.log('Success'));
+}
 
   componentDidMount(){
     const apiUrl = 'https://instagram-data-source.herokuapp.com/api/feed/' + this.userId;
@@ -94,24 +135,15 @@ class Profile extends Component{
         return(
           <div className="container-fluid" id="container_fluid">
           <Header />
-          <div className="profileFeed">
-          404! User does not exist.
-          </div>
+          <NotFoundPage />
           </div>
         );
       }
-      else if(typeof this.state.user[0].userId != 'undefined' && this.state.rows.length === 0){
-        return(
-          <div className="container-fluid" id="container_fluid">
-          <Header />
-          <div className="profileFeed">
-          User has not uploaded any pictures yet.
-          </div>
-          </div>
-        );
-      }
-    else{
+      
+      else{
+       
       return(
+        
           <ProfileChild 
           user={this.state.user}
           rows={this.state.rows}
@@ -121,6 +153,7 @@ class Profile extends Component{
           onAfterOpen={this.afterOpenModal}
           closeModal={this.closeModal}
           likePicture={this.likePicture}
+          postComment={this.postComment}
           />
           );
       }
@@ -177,7 +210,8 @@ const ProfileChild = (props) => {
           onAfterOpen={props.onAfterOpen}
           modalObj={props.modalObj}
           userId={props.user[0].userId}
-          likePicture={props.likePicture}>
+          likePicture={props.likePicture}
+          postComment={props.postComment}>
           </PictureModal>
         </div>
         </div>   
@@ -188,13 +222,22 @@ const ProfileChild = (props) => {
     return(
       <div className="container">
         <Header />
+        <div className="profileFeed">
+        <div className="row justify-content-md-center mt-4">
+          <div className="col-sm-6"><img src={props.user[0].userDPUrl} className="rounded-circle img-fluid mx-auto d-block" style={{width:180}} /></div>
+          <div className="col-sm-6 text-sm-left text-center mt-4">
+           <h2 >{props.user[0].userId} </h2>
+            <p><strong>{props.rows.length}</strong> posts</p>
+            <h6>{props.user[0].userName} </h6>
+            <p>{props.user[0].userDesc} </p>
+          </div>
+        </div>
         <div className="row mt-5">
         <div className="col text-center">
-        <div className="spinner-border text-secondary mt-5" role="status">
-          <span className="sr-only">Loading...</span>
+        <h1 className="display-4">No posts yet</h1>
         </div>
         </div>
-        </div>
+      </div>
       </div>
     );
   
