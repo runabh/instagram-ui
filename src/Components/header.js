@@ -11,6 +11,9 @@ class Header extends Component{
                     <div className="divider"></div>
                     <div className="insta-logo"></div>
                     </Link>
+                    <Link to="/runabh">
+                    <div className="glyphProfile"></div>
+                    </Link>
                 </div>
             </nav>
         );

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import UserName from './userName';
+import React from 'react';
 import Picture from './picture';
 import Header from './header'
 

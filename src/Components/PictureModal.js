@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import Comments from './Comments'
 import AddComments from './AddComment'
+import {Link} from 'react-router-dom';
 Modal.setAppElement('#root')
 const PictureModal = (props) => (
     <Modal
@@ -20,7 +21,7 @@ const PictureModal = (props) => (
                         <img src = {props.modalObj.url} onDoubleClick={props.likePicture} alt="text" className="img-fluid" ></img>
                     </div>
                     <div className="col-lg-4 px-1">
-                        <div><p><strong>{props.userId}</strong> {props.modalObj.title}</p></div>
+                        <div><p><strong><Link className="username" to={props.userId}>{props.userId}</Link></strong> {props.modalObj.title}</p></div>
                         <div className="">
                             <Comments commentsArr={props.modalObj.comments} />
                         </div>

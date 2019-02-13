@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
 import Header from './header'
 import '../styles/Profile.css';
 import NotFoundPage from './NotFoundPage';
@@ -9,8 +8,8 @@ import PictureModal from './PictureModal';
 class Profile extends Component{
   constructor(props){
     super(props);
-    
-    this.userId = this.props.match.params.id;
+    console.log('wecf');
+    this.userId = this.props.userId;
     this.state= {
       user:{
         userId:undefined,
@@ -130,6 +129,7 @@ class Profile extends Component{
   }
 
   render(){
+    console.log('render');
     if(this.state.isComplete){
       if(this.state.user[0] === undefined){
         return(
@@ -188,7 +188,7 @@ const ProfileChild = (props) => {
         <Header />
         <div className="profileFeed">
         <div className="row justify-content-md-center mt-4">
-          <div className="col-sm-6"><img src={props.user[0].userDPUrl} className="rounded-circle img-fluid mx-auto d-block" style={{width:180}} /></div>
+          <div className="col-sm-6"><img src={props.user[0].userDPUrl} alt="" className="rounded-circle img-fluid mx-auto d-block" style={{width:180}} /></div>
           <div className="col-sm-6 text-sm-left text-center mt-4">
            <h2 >{props.user[0].userId} </h2>
             <p><strong>{props.rows.length}</strong> posts</p>
@@ -224,7 +224,7 @@ const ProfileChild = (props) => {
         <Header />
         <div className="profileFeed">
         <div className="row justify-content-md-center mt-4">
-          <div className="col-sm-6"><img src={props.user[0].userDPUrl} className="rounded-circle img-fluid mx-auto d-block" style={{width:180}} /></div>
+          <div className="col-sm-6"><img src={props.user[0].userDPUrl} alt="" className="rounded-circle img-fluid mx-auto d-block" style={{width:180}} /></div>
           <div className="col-sm-6 text-sm-left text-center mt-4">
            <h2 >{props.user[0].userId} </h2>
             <p><strong>{props.rows.length}</strong> posts</p>
