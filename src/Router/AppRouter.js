@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import NotFoundPage from '../Components/NotFoundPage';
 import App from '../Components/App';
@@ -10,7 +11,7 @@ const AppRouter = () => (
     <div>
         <Switch>
             <Route path="/" component={App} exact={true} />
-            <Route path="/:id" component={ProfilePage} exact />
+            <Route path="/:id" component={ProfilePage} />
             <Route component={NotFoundPage} />
         </Switch>
     </div>

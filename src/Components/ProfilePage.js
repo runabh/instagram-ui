@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router';
 import Profile from './Profile'
 
 export default class ProfilePage extends Component{
     constructor(props){
         super(props);
-        console.log('wecf');
         this.userId = this.props.match.params.id;
-        
       }
-
+      
       render(){
+            const ProfilewithRouter = withRouter(Profile);
           let userId = this.props.match.params.id;
+          
           return(
-              <Profile userId = {userId} />
+              <ProfilewithRouter userId = {userId} location={this.props.location} />
           )
       }
 }   
