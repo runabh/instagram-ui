@@ -68,7 +68,7 @@ class Picture extends Component{
                     </div>
                 </div>
                 <div className="col-12 mt-sm-3 mt-2">
-                    <img src={this.state.obj.url} alt="" onDoubleClick={this.likePicture}   />
+                    <img src={this.state.obj.url} className="mx-auto feed-img" alt="" onDoubleClick={this.likePicture}   />
                 </div>
                 <div className="col-12 mt-2">
                     <div className="container-fluid">

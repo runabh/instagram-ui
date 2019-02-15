@@ -17,8 +17,8 @@ const PictureModal = (props) => (
         <div className="modal-body">
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-8 px-2">
-                        <img src = {props.modalObj.url} onDoubleClick={props.likePicture} alt="text" className="img-fluid" ></img>
+                    <div className="col-lg-8">
+                        <img src = {props.modalObj.url} onDoubleClick={props.likePicture} alt="text" className="img-fluid mx-auto pictureModal-img" ></img>
                     </div>
                     <div className="col-lg-4 px-1">
                         <div><p><strong><Link className="username" to={props.userId}>{props.userId}</Link></strong> {props.modalObj.title}</p></div>

@@ -22,9 +22,11 @@
     text-decoration: none;
     color:black;
 }
-.picture img{
+.feed-img{
     display: block;
-    width: 100%;
+    max-width: 600px;
+    max-height: 75vh;
+    
 }
 .pictureFooter{
     border-top: 1px solid #efefef;

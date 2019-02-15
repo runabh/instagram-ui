@@ -191,9 +191,10 @@ const ProfileChild = (props) => {
   const openModal = (e) => {
     props.openModal(e);
   }
+  
   if(props.rows.length > 0){
     return(
-      <div className="container-fluid" id="container_fluid">
+      <div className="container-fluid profileFeed-container" id="container_fluid">
         <Header />
         <div className="profileFeed">
         <div className="row justify-content-md-center mt-4">
@@ -208,8 +209,12 @@ const ProfileChild = (props) => {
       
         <div className="row mt-4 mx-n1">
         {props.rows.map((obj, index) => (
-          <div key={obj._id} className="col-4 mt-2 px-1">
-          <img src = {obj.url} alt="text" className="img-fluid" onClick={openModal.bind(this, obj)} />
+          <div key={obj._id} 
+          className="col-4 mt-2 px-1">
+          <div className="profileFeed-picture-div" 
+          style={{backgroundImage : 'url('+obj.url+')'}}
+          onClick={openModal.bind(this, obj)} >
+          </div>
           </div>
           
         ))}

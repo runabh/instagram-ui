@@ -1,5 +1,4 @@
 import React from 'react';
-import {withRouter} from 'react-router';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import NotFoundPage from '../Components/NotFoundPage';
 import App from '../Components/App';
