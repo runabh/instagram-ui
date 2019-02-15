@@ -4,10 +4,11 @@
    
 }
 .modal-dialog{
-    margin-top: 25px;
+    margin-top: 30px;
+    
 }
 .modal-body{
-    max-height: 90vh;
+    max-height: 88vh;
     overflow-y: auto;
 }
 .profileFeed-picture{
@@ -32,7 +33,7 @@
 
 .pictureModal-img{
     display: block;
-    max-height: 80vh;
+    max-height: 85vh;
     
 }
 
