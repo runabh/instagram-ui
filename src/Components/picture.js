@@ -8,7 +8,8 @@ class Picture extends Component{
     constructor(props){
         super(props);
         this.state={
-            obj:this.props.obj
+            obj:this.props.obj,
+            focused: false
         }
         this.likePicture = this.likePicture.bind(this);
     }
@@ -51,7 +52,9 @@ class Picture extends Component{
         }).then(res => res.json())
         .then(console.log('Success'));
     }
-    
+    focus = () => {
+        this.setState({focus: true});
+    }
     render(){
         
         
@@ -74,9 +77,8 @@ class Picture extends Component{
                     <div className="container-fluid">
                     <div className="row">
                         <div className="col-1"><div onClick={this.likePicture} className={this.state.obj.liked===0 ? "glyph glyphHeart" : "glyph glyphHeart glyphHeart-liked"}></div></div>
-                        <div className="col-1"><div className="glyph glyphComment"></div></div>
-                        <div className="col-1"><div className="glyph glyphShare"></div></div>
-                        <div className="col-1 offset-sm-8"><div className="glyph glyphSave"></div></div>
+                        <div className="col-1"><div onClick={this.focus} className="glyph glyphComment"></div></div>
+                        
                     </div>
                     </div>
                 </div>

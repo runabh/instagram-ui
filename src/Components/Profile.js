@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router';
-import createHistory from 'history/createBrowserHistory'
 import Header from './header'
 import '../styles/Profile.css';
 import NotFoundPage from './NotFoundPage';
@@ -28,8 +26,7 @@ class Profile extends Component{
         likes: undefined,
         liked: undefined,
         comments: []
-      },
-      
+      }
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -60,10 +57,7 @@ class Profile extends Component{
       }
     });
   }
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    //document.getElementById("container_fluid").style.overflow = "hidden";
-  }
+ 
   
   likePicture(){
     let modalObj = this.state.modalObj;
@@ -112,15 +106,7 @@ class Profile extends Component{
     }).then(res => res.json())
     .then(console.log('Success'));
 }
-  // shouldComponentUpdate(){
-    
-  //   if (this.props.location !== this ){
-  //     return true;
-  //   }
-  //   else{
-  //     return false;
-  //   }
-  // }
+  
   componentDidMount(){
     const apiUrl = 'https://instagram-data-source.herokuapp.com/api/feed/' + this.userId;
     fetch(apiUrl)

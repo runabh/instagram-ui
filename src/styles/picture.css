@@ -24,8 +24,8 @@
 }
 .feed-img{
     display: block;
-    max-width: 600px;
-    max-height: 75vh;
+    max-width: 100%;
+    max-height: 85vh;
     
 }
 .pictureFooter{
