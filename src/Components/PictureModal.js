@@ -15,7 +15,7 @@ class PictureModal extends Component{
         }
     }
     focus = () => {
-        this.setState({focsed: true});    
+        this.setState({focused: true});    
     }
     
     render(){
@@ -50,7 +50,7 @@ class PictureModal extends Component{
                             <div>
                                 <p><strong>{this.props.modalObj.likes>0 ? this.props.modalObj.likes + ' likes' : ''} </strong></p>
                             </div>
-                            <AddComments postComment={this.props.postComment} />
+                            <AddComments postComment={this.props.postComment} focused={this.state.focused} />
                             
                             </div>
                         </div>

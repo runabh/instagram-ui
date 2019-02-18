@@ -4,7 +4,9 @@ import React, { Component } from 'react';
 class AddComments extends Component{
   
     componentDidUpdate(prevProps, prevState) {
+        if(this.props.focused){
         this.comment.focus();
+        }
     }
     postComment = (e) => {
         e.preventDefault();

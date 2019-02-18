@@ -53,7 +53,7 @@ class Picture extends Component{
         .then(console.log('Success'));
     }
     focus = () => {
-        this.setState({focus: true});
+        this.setState({focused: true});    
     }
     render(){
         
@@ -96,7 +96,7 @@ class Picture extends Component{
                 <div className="col-12 mt-2">
                     <div className="container-fluid">
                         <Comments commentsArr={this.state.obj.comments} />
-                        <AddComments postComment={this.postComment} />
+                        <AddComments postComment={this.postComment} focused={this.state.focused} />
                     </div>
                 </div>
                 
