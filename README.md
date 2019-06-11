@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+You can view the live app here: https://sleepy-roentgen-8ea596.netlify.com/
+
 ## Available Scripts
 
 In the project directory, you can run:
